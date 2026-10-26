@@ -68,7 +68,7 @@
           <span></span><span></span><span></span>
         </button>
       </div>
-      <div class="nav-backdrop" id="nav-backdrop" hidden></div>
+      <div class="nav-backdrop" id="nav-backdrop"></div>
       <nav class="nav-mobile" id="mobile-nav" aria-label="Mobile">
         <ul>${links}
           <li class="lang-switch" style="margin-top:1rem">
@@ -86,30 +86,84 @@
     const toggle = header.querySelector(".menu-toggle");
     const mobile = header.querySelector("#mobile-nav");
     const backdrop = header.querySelector("#nav-backdrop");
+    let lastY = window.scrollY;
+    let menuOpen = false;
 
     function closeMenu() {
+      menuOpen = false;
       toggle.setAttribute("aria-expanded", "false");
       mobile.classList.remove("is-open");
       backdrop.classList.remove("is-open");
-      backdrop.hidden = true;
+      header.classList.remove("is-menu-open");
+      document.body.classList.remove("is-nav-open");
     }
 
     function openMenu() {
+      menuOpen = true;
       toggle.setAttribute("aria-expanded", "true");
       mobile.classList.add("is-open");
       backdrop.classList.add("is-open");
-      backdrop.hidden = false;
+      header.classList.add("is-menu-open");
+      header.classList.remove("is-hidden");
+      document.body.classList.add("is-nav-open");
     }
 
     toggle.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") === "true";
-      if (open) closeMenu();
+      if (menuOpen) closeMenu();
       else openMenu();
     });
     backdrop.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menuOpen) closeMenu();
+    });
 
-    window.addEventListener("scroll", () => {
-      header.classList.toggle("is-scrolled", window.scrollY > 8);
+    window.addEventListener(
+      "scroll",
+      () => {
+        const y = window.scrollY;
+        header.classList.toggle("is-scrolled", y > 8);
+        if (menuOpen) {
+          lastY = y;
+          return;
+        }
+        // Hide header when scrolling down, show when scrolling up
+        if (y > lastY + 6 && y > 80) header.classList.add("is-hidden");
+        else if (y < lastY - 4) header.classList.remove("is-hidden");
+        if (y < 24) header.classList.remove("is-hidden");
+        lastY = y;
+      },
+      { passive: true }
+    );
+  }
+
+  function initPageMotion() {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    requestAnimationFrame(() => {
+      document.documentElement.classList.add("is-ready");
+    });
+    if (reduced) return;
+
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[href]");
+      if (!a) return;
+      if (a.target === "_blank" || a.hasAttribute("download")) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const href = a.getAttribute("href") || "";
+      if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
+      let url;
+      try {
+        url = new URL(a.href, window.location.href);
+      } catch (_) {
+        return;
+      }
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname === window.location.pathname && url.search === window.location.search) return;
+
+      e.preventDefault();
+      document.documentElement.classList.add("is-leaving");
+      window.setTimeout(() => {
+        window.location.href = url.href;
+      }, 220);
     });
   }
 
@@ -706,6 +760,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     injectChrome();
+    initPageMotion();
     initMuteButtons();
     initPuzzles();
     initScores();
