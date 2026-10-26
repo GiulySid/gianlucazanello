@@ -1,0 +1,22 @@
+# WordPress dump (core, plugins, config with secrets)
+www.gianlucazanello.it/
+
+# Large media (copy with scripts/copy-videos.ps1 from the WP dump)
+site/assets/video/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Local env / secrets
+.env
+.env.*
+*.log
+
+# Node (if added later)
+node_modules/
+dist/
+.cache/
