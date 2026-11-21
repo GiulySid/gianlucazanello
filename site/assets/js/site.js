@@ -160,6 +160,16 @@
       if (url.pathname === window.location.pathname && url.search === window.location.search) return;
 
       e.preventDefault();
+      const coverLink = a.classList.contains("album-cover-link") ? a : null;
+      if (coverLink) {
+        coverLink.classList.add("is-exiting");
+        document.documentElement.classList.add("is-leaving-cover");
+        window.setTimeout(() => {
+          window.location.href = url.href;
+        }, 700);
+        return;
+      }
+
       document.documentElement.classList.add("is-leaving");
       window.setTimeout(() => {
         window.location.href = url.href;
@@ -648,6 +658,16 @@
     document.addEventListener("click", (e) => {
       if (e.target.closest(".gz-card")) return;
       cards.forEach((c) => c.classList.remove("is-open"));
+    });
+
+    const hash = window.location.hash.replace(/^#/, "");
+    if (!hash) return;
+    const target = document.getElementById(hash);
+    if (!target || !target.classList.contains("gz-card")) return;
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      target.classList.add("is-spotlight");
+      window.setTimeout(() => target.classList.remove("is-spotlight"), 1800);
     });
   }
 
