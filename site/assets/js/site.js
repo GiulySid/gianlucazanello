@@ -778,6 +778,46 @@
     window.addEventListener("resize", settle);
   }
 
+  function initLazyLiveVideos() {
+    const videos = [...document.querySelectorAll(".live-grid video")];
+    if (!videos.length) return;
+
+    videos.forEach((video) => {
+      video.pause();
+      video.removeAttribute("autoplay");
+      // Keep metadata so a frame is visible even before play (hosting / autoplay limits).
+      video.preload = "metadata";
+      try {
+        video.load();
+      } catch (_) {}
+    });
+
+    if (!("IntersectionObserver" in window)) {
+      videos.forEach((video) => {
+        video.preload = "auto";
+        video.play().catch(() => {});
+      });
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            video.preload = "auto";
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { rootMargin: "200px 0px", threshold: 0.1 }
+    );
+
+    videos.forEach((video) => io.observe(video));
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     injectChrome();
     initPageMotion();
@@ -788,5 +828,6 @@
     initReveal();
     initMediaCards();
     initExtraJuggle();
+    initLazyLiveVideos();
   });
 })();

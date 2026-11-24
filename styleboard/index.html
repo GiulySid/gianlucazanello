@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gianluca Zanello — stile vecchio sito</title>
+  <style>
+    :root {
+      --c1: #ffcd05;
+      --c2: #fcb424;
+      --c3: #504e4a;
+      --c4: #000000;
+      --c5: #edeff2;
+      --c6: rgba(133, 133, 133, 0.11);
+      --c7: #fdfdfd;
+      --c8: #ffffff;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: #111;
+      color: var(--c5);
+      line-height: 1.5;
+    }
+
+    header {
+      padding: 2.5rem 1.5rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    header h1 {
+      margin: 0 0 .35rem;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--c8);
+    }
+    header p {
+      margin: 0;
+      max-width: 42rem;
+      color: rgba(237,239,242,.72);
+      font-size: .95rem;
+    }
+
+    main {
+      padding: 1.5rem;
+      display: grid;
+      gap: 2rem;
+      max-width: 960px;
+    }
+
+    section h2 {
+      margin: 0 0 1rem;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--c2);
+      font-weight: 700;
+    }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: .75rem;
+    }
+    .swatch {
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.1);
+      background: #1a1a1a;
+    }
+    .swatch .chip {
+      height: 72px;
+    }
+    .swatch .meta {
+      padding: .65rem .75rem .8rem;
+      font-size: .78rem;
+    }
+    .swatch .meta strong {
+      display: block;
+      color: var(--c8);
+      font-weight: 600;
+      margin-bottom: .15rem;
+    }
+    .swatch .meta code {
+      color: rgba(237,239,242,.65);
+      font-size: .72rem;
+    }
+
+    .type-samples {
+      display: grid;
+      gap: 1.25rem;
+      background: var(--c4);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 4px;
+      padding: 1.5rem;
+    }
+    .type-samples .label {
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(237,239,242,.45);
+      margin-bottom: .35rem;
+    }
+    .site-title {
+      font-weight: 700;
+      font-size: 25px;
+      line-height: 1.5;
+      color: var(--c4);
+      background: var(--c1);
+      display: inline-block;
+      padding: .2rem .6rem;
+    }
+    .nav-sample {
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 1.3;
+      text-transform: uppercase;
+      color: var(--c5);
+      letter-spacing: .04em;
+    }
+    .nav-sample span { margin-right: 1.25rem; opacity: .85; }
+    .nav-sample span:hover { color: var(--c2); }
+    .heading-sample {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--c2);
+      margin: 0;
+    }
+    .body-sample {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--c5);
+      max-width: 36rem;
+      margin: 0;
+    }
+    .link-sample a {
+      color: var(--c1);
+      font-weight: 600;
+    }
+    .link-sample a:hover { color: var(--c2); }
+
+    .btn-row { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 5px 20px;
+      border: none;
+      background: var(--c1);
+      color: #fff;
+      font-family: var(--font);
+      font-weight: 500;
+      font-size: 15px;
+      cursor: default;
+    }
+    .btn.alt { background: var(--c2); }
+
+    .preview {
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .preview .bar {
+      background: var(--c4);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(255,205,5,.35);
+    }
+    .preview .bar .logo {
+      font-weight: 700;
+      font-size: 25px;
+      color: var(--c1);
+    }
+    .preview .hero {
+      background: linear-gradient(160deg, #0a0a0a, #1c1a14 60%, #2a2410);
+      padding: 3rem 1.5rem;
+    }
+    .preview .hero h3 {
+      margin: 0 0 .75rem;
+      font-family: Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--c2);
+    }
+    .preview .hero p {
+      margin: 0 0 1.25rem;
+      color: var(--c5);
+      max-width: 28rem;
+    }
+
+    footer.note {
+      padding: 0 1.5rem 2.5rem;
+      max-width: 960px;
+      color: rgba(237,239,242,.45);
+      font-size: .8rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Stile del vecchio sito WordPress</h1>
+    <p>
+      Estratto dal CSS custom di <strong>Blocksy</strong> salvato sul server
+      (<code>uploads/blocksy/css/global.css</code>). Sono i colori e i font
+      effettivamente usati sul sito live, non solo i default del tema.
+    </p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Palette colori</h2>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="chip" style="background:var(--c1)"></div>
+          <div class="meta"><strong>Accento 1</strong><code>#ffcd05</code><br>bottoni, link</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:var(--c2)"></div>
+          <div class="meta"><strong>Accento 2 / titoli</strong><code>#fcb424</code><br>heading, hover</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:var(--c3)"></div>
+          <div class="meta"><strong>Grigio caldo</strong><code>#504e4a</code></div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:var(--c4)"></div>
+          <div class="meta"><strong>Nero</strong><code>#000000</code><br>sfondi scuri</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:var(--c5)"></div>
+          <div class="meta"><strong>Testo chiaro</strong><code>#edeff2</code></div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:var(--c7)"></div>
+          <div class="meta"><strong>Bianco caldo</strong><code>#fdfdfd</code></div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:var(--c8); border-bottom:1px solid #ddd"></div>
+          <div class="meta"><strong>Bianco</strong><code>#ffffff</code></div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:var(--c6)"></div>
+          <div class="meta"><strong>Overlay leggero</strong><code>rgba(133,133,133,.11)</code></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tipografia</h2>
+      <div class="type-samples">
+        <div>
+          <div class="label">Logo / site title — System UI, 25px, bold 700</div>
+          <div class="site-title">Gianluca Zanello</div>
+        </div>
+        <div>
+          <div class="label">Menu — System UI, 12px, bold, UPPERCASE</div>
+          <div class="nav-sample">
+            <span>Home</span><span>Biografia</span><span>Media</span><span>Contatti</span>
+          </div>
+        </div>
+        <div>
+          <div class="label">Titoli — Georgia (serif), ~35–40px, bold, colore #fcb424</div>
+          <p class="heading-sample">Musica e orchestra</p>
+        </div>
+        <div>
+          <div class="label">Corpo testo — System UI default, 15–16px, #edeff2</div>
+          <p class="body-sample">
+            Testo di esempio come sul sito: font di sistema (Segoe UI / system-ui),
+            leggero e neutro, su sfondo nero.
+          </p>
+        </div>
+        <div class="link-sample">
+          <div class="label">Link</div>
+          <a href="#">Esempio di link accento oro</a>
+        </div>
+        <div>
+          <div class="label">Bottoni — sfondo #ffcd05, testo bianco, 15px / weight 500</div>
+          <div class="btn-row">
+            <span class="btn">Scopri di più</span>
+            <span class="btn alt">Hover / secondario</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Anteprima composizione</h2>
+      <div class="preview">
+        <div class="bar">
+          <div class="logo">Gianluca Zanello</div>
+          <div class="nav-sample">
+            <span>Home</span><span>Media</span><span>Contatti</span>
+          </div>
+        </div>
+        <div class="hero">
+          <h3>Direttore e musicista</h3>
+          <p>Anteprima dello stile: nero + oro, titoli in Georgia, UI in font di sistema.</p>
+          <span class="btn">Ascolta</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="note">
+    Nota: esiste anche il tema <em>Euphony Blocks</em> (font Mrs Saint Delafield + PT Sans,
+    primary #f9a926 su fondo #151515). Il CSS in <code>uploads/blocksy</code> indica però
+    che il sito personalizzato in produzione usava Blocksy con la palette qui sopra.
+  </footer>
+</body>
+</html>

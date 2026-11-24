@@ -1,0 +1,12 @@
+# MIME types for media (Aruba Linux / Apache)
+AddType video/mp4 .mp4
+AddType video/quicktime .mov
+AddType audio/mpeg .mp3
+AddType image/avif .avif
+
+# Allow large static media downloads
+<IfModule mod_headers.c>
+  <FilesMatch "\.(mp4|mov|mp3)$">
+    Header set Accept-Ranges bytes
+  </FilesMatch>
+</IfModule>
