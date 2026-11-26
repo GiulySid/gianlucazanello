@@ -26,6 +26,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -41,6 +43,9 @@ body {
     linear-gradient(180deg, var(--ink-soft) 0%, var(--ink) 40%, var(--ink) 100%);
   background-attachment: fixed;
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100%;
+  position: relative;
 }
 
 img {
@@ -293,31 +298,50 @@ p {
 .nav-mobile {
   display: none;
   position: fixed;
-  inset: var(--header-h) 0 0 auto;
-  width: min(90vw, 360px);
+  inset: var(--header-h) 0 0 0;
+  width: 100%;
+  max-width: 100%;
   height: calc(100dvh - var(--header-h));
-  background: #080808;
-  padding: 1.75rem 1.5rem 2.5rem;
-  transform: translateX(100%);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  background: transparent;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  overflow: hidden;
   z-index: 101;
-  border-left: 1px solid rgba(255, 205, 5, 0.28);
-  box-shadow: -18px 0 48px rgba(0, 0, 0, 0.55);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  visibility: hidden;
+  pointer-events: none;
+  transform: none;
 }
 
 .nav-mobile.is-open {
-  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .nav-mobile ul {
   list-style: none;
+  position: absolute;
+  top: 0;
+  right: 0;
   margin: 0;
-  padding: 0;
+  width: min(90vw, 360px);
+  max-width: 100%;
+  height: 100%;
+  padding: 1.75rem 1.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  background: #080808;
+  border-left: 1px solid rgba(255, 205, 5, 0.28);
+  box-shadow: -18px 0 48px rgba(0, 0, 0, 0.55);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-mobile.is-open ul {
+  transform: translateX(0);
 }
 
 .nav-mobile li {
