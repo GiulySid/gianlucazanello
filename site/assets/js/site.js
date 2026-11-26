@@ -645,6 +645,7 @@
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
     cards.forEach((card) => {
+      if (card.classList.contains("gz-card-link")) return;
       card.addEventListener("click", (e) => {
         if (e.target.closest("a")) return;
         if (canHover) return;

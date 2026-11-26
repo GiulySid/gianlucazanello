@@ -1050,12 +1050,26 @@ blockquote {
   margin: 0;
 }
 
-.home-split .home-cta p {
-  margin: 0;
+.home-split .home-cta p,
+.home-split .home-cta p:last-child,
+.home-split .home-cta .home-cta-focus {
+  margin: 0 0 0.75rem;
+  font-family: var(--display);
   font-size: clamp(0.95rem, 1.7vw, 1.25rem);
   color: var(--yellow);
   font-weight: 700;
+  font-style: normal;
   line-height: 1.7;
+}
+
+.home-split .home-cta p:last-child,
+.home-split .home-cta .home-cta-focus {
+  margin-bottom: 0;
+}
+
+.gz-card-link {
+  color: inherit;
+  text-decoration: none;
 }
 
 .trailer-final {
@@ -1798,7 +1812,7 @@ blockquote {
 .extra-name {
   color: inherit;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .extra-section {
@@ -2047,6 +2061,14 @@ blockquote {
   height: auto;
 }
 
+.momo-video {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .momo-content {
   min-width: 0;
   max-width: 40rem;
@@ -2091,9 +2113,9 @@ blockquote {
 }
 
 .momo-name {
-  color: var(--yellow);
+  color: inherit;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* �� Contacts �� */
